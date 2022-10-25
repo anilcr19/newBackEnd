@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.thecodeveal.app.model.Authority;
+import com.thecodeveal.app.model.Department;
 import com.thecodeveal.app.model.User;
 import com.thecodeveal.app.repo.AuthorityDetailsRepository;
+import com.thecodeveal.app.repo.DepartmentRepository;
 import com.thecodeveal.app.repo.UserDetailsRepository;
 import com.thecodeveal.app.service.AuthorityService;
 
@@ -32,6 +34,10 @@ public class SpringSecurityDemoAppApplication {
 	
 	@Autowired
 	AuthorityService authorityService;
+	
+	
+	@Autowired
+	DepartmentRepository departmentRepository;
 	
 	
 	public static void main(String[] args) {
@@ -82,6 +88,35 @@ public class SpringSecurityDemoAppApplication {
 			
 			System.out.println(user.getUsername() +" "+user.getPassword());
 			
+			
+			
+			
+			Department department = new Department("INTERN", "intern");
+			
+			departmentRepository.save(department);
+			
+			department = new Department("IT", "information Technology");
+			
+			departmentRepository.save(department);
+			
+			department = new Department("HR", "Human Resources");
+			
+			departmentRepository.save(department);
+			
+			
+			department = new Department("SAL", "Sales");
+			
+			departmentRepository.save(department);
+			
+			
+			
+			department = new Department("MRKT", "Marketing");
+			
+			departmentRepository.save(department);
+			
+			department = new Department("MNGMT", "Management");
+			
+			departmentRepository.save(department);
 			
 			
 			

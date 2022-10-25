@@ -2,8 +2,11 @@ package com.thecodeveal.app.controller;
 
 import java.util.*;
 
+import javax.swing.text.Document;
+
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties.Decryption;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,11 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thecodeveal.app.model.Authority;
+import com.thecodeveal.app.model.Department;
 import com.thecodeveal.app.model.User;
 import com.thecodeveal.app.repo.AuthorityDetailsRepository;
 import com.thecodeveal.app.repo.UserDetailsRepository;
 import com.thecodeveal.app.service.AuthorityService;
 import com.thecodeveal.app.service.CustomUserService;
+import com.thecodeveal.app.service.DepartmentService;
 
 @RestController
 @RequestMapping("/")
@@ -44,6 +49,8 @@ public class AppController {
 	@Autowired
 	AuthorityService authorityService;
 	
+	@Autowired
+	DepartmentService departmentService;
 	
 	
 	
@@ -123,9 +130,17 @@ public class AppController {
 	}
 	
 	
-	@PostMapping("/addCandidate/{email}/{password}")
-	public boolean addCandidate(@PathVariable("email") String email ,  @PathVariable("password") String password)
+	@PostMapping("/addCandidate")
+	public boolean addCandidate(@RequestBody String u) throws JSONException
 	{
+		JSONObject jsonObject= new JSONObject(u);
+		
+			String email = (String) jsonObject.get("cemail");
+			String password = (String)  jsonObject.get("cpassword");
+			String salary = (String) jsonObject.get("csal");
+			String department = (String) jsonObject.get("cdept");
+		
+		
 		 
 			
 			  List<Authority>authorityList=new ArrayList<>();
@@ -139,10 +154,19 @@ public class AppController {
 				}
 				
 				User user =new User();
+				
+				Department dep = departmentService.findDepartment(department);
+				
+				System.out.println(dep.getDepartment());
+				
+				user.setDepartment(dep);
+				
+				
 				user.setUsername(email);				
 				user.setPassword(passwordEncoder.encode(password));				
 				user.setAuthorites(authorityList);				
-				user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");				
+				user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");	
+				user.setSalary(Long.parseLong(salary));
 				userDetailsRepository.save(user);
 				return true;
 			  

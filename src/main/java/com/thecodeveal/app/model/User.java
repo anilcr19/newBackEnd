@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -54,6 +55,20 @@ public class User implements UserDetails{
 	
 	
 	
+	
+	@ManyToOne
+	Department department;
+	
+	
+	
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 	public List<Training> getCourses() {
 		return courses;
 	}
@@ -83,10 +98,19 @@ public class User implements UserDetails{
 	private String profilepic;
 	public String resume;
 	public String marksheets;
+	private Long salary;
 	
 	
 	
 	
+	public Long getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Long salary) {
+		this.salary = salary;
+	}
+
 	public String getResume() {
 		return resume;
 	}
