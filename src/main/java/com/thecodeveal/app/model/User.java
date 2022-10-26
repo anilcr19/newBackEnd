@@ -100,9 +100,29 @@ public class User implements UserDetails{
 	public String marksheets;
 	private Long salary;
 	
+	private String location;
+	
+	private String role;
 	
 	
 	
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public Long getSalary() {
 		return salary;
 	}

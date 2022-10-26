@@ -139,6 +139,9 @@ public class AppController {
 			String password = (String)  jsonObject.get("cpassword");
 			String salary = (String) jsonObject.get("csal");
 			String department = (String) jsonObject.get("cdept");
+			String name = (String) jsonObject.get("cname");
+			String location = (String) jsonObject.get("cloc");
+			String role = (String) jsonObject.get("crole");
 		
 		
 		 
@@ -160,9 +163,11 @@ public class AppController {
 				System.out.println(dep.getDepartment());
 				
 				user.setDepartment(dep);
+				user.setRole(role);
 				
-				
-				user.setUsername(email);				
+				user.setUsername(email);			
+				user.setFirstname(name);
+				user.setLocation(location);
 				user.setPassword(passwordEncoder.encode(password));				
 				user.setAuthorites(authorityList);				
 				user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");	
