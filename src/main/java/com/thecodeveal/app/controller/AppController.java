@@ -192,6 +192,7 @@ public class AppController {
 		
 		
 		
+		
 		if((userDetailsRepository.findByUsername(email)==null)||userDetailsRepository.findByUsername(email).getEmailGeneration())
 		{
 			System.out.println("invalid");
@@ -199,7 +200,12 @@ public class AppController {
 		}
 		
 		
+		System.out.println(virtusaemail+" "+email+" "+password);
 		
+		
+		User oldUser=userDetailsRepository.findByUsername(email);
+		
+		System.out.println(oldUser);
 		
 		List<Authority>authorityList=new ArrayList<>();
 		
@@ -207,6 +213,42 @@ public class AppController {
 		
 		User user =new User();
 		
+		user.setAddressone(oldUser.getAddressone());
+		
+		user.setAddresstwo(oldUser.getAddresstwo());
+		
+		user.setAlternatemobilenumber(oldUser.getAlternatemobilenumber());
+		
+		// user.setCourses(oldUser.getCourses());
+		
+		user.setDateofbirth(oldUser.getDateofbirth());
+		
+		user.setDepartment(oldUser.getDepartment());
+		
+		user.setMobilenumber(oldUser.getMobilenumber());
+		
+		user.setFathername(oldUser.getFathername());
+		
+		
+		user.setMothername(oldUser.getMothername());
+		
+		user.setFathermobilenumber(oldUser.getFathermobilenumber());
+		
+		user.setMothermobilenumber(oldUser.getMothermobilenumber());
+		
+		
+		user.setPincode(oldUser.getPincode());
+		
+		
+		user.setPersonalemail(oldUser.getUsername());
+		
+		user.setSalary(oldUser.getSalary());
+		
+		user.setRole(oldUser.getRole());
+		
+		user.setResume(oldUser.getResume());
+		
+		user.setMarksheets(oldUser.getMarksheets());
 		
 		
 		user.setUsername(virtusaemail);
@@ -217,8 +259,19 @@ public class AppController {
 		
 		user.setEmailGeneration(true);
 		
-		user.setProfilepic("https://northmemorial.com/wp-content/uploads/2016/10/PersonPlaceholder.png");
+	    user.setProfilepic(oldUser.getProfilepic());
+	    
+	    
+	    user.setFirstname(oldUser.getFirstname());
+	    
+	    user.setMiddlename(oldUser.getMiddlename());
+	    
+	    user.setLastname(oldUser.getLastname());
+	    
+	    user.setLocation(oldUser.getLocation());
 		
+		
+		System.out.println(user);
 		
 		
 		//user.setMailGeneration(true);
