@@ -103,7 +103,7 @@ public class User implements UserDetails{
 	private String location;
 	
 	private String role;
-	
+	private boolean offerAcceptance;
 	
 	
 	
@@ -283,6 +283,16 @@ public class User implements UserDetails{
 
 	public void setEmailGeneration(boolean emailGeneration) {
 		this.emailGeneration = emailGeneration;
+	}
+	
+ 	
+
+	public boolean isOfferAcceptance() {
+		return offerAcceptance;
+	}
+
+	public void setOfferAcceptance(boolean offerAcceptance) {
+		this.offerAcceptance = offerAcceptance;
 	}
 
 	@Override

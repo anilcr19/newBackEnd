@@ -300,6 +300,27 @@ public class AppController {
 	  return mapper.writeValueAsString(u);
 	}
 	
+	@PostMapping("/offerstatus/{username}")
+	public boolean offerstatus(@PathVariable("username") String email)
+	{
+		
+		System.out.println("hello world");
+
+		User u = userDetailsRepository.findByUsername(email);
+		
+		if(u==null)
+		{
+			return false;
+		}
+
+		u.setOfferAcceptance(true);
+		
+		userDetailsRepository.save(u);
+		
+		return true;
+
+	}
+
 	
 	
 	
